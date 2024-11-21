@@ -3,12 +3,12 @@ name: Trigger auto deployment for mayorcontainerapp
 # When this action will be executed
 on:
   # Automatically trigger it when detected changes in repo
-  push:
-    branches: 
-      [ main ]
-    paths:
-    - '**'
-    - '.github/workflows/mayorcontainerapp-AutoDeployTrigger-2f9a9702-dfe5-44f9-a714-2bbe11ef9f5d.yml'
+  # push:
+  #   branches: 
+  #     [ main ]
+  #   paths:
+  #   - '**'
+  #   - '.github/workflows/mayorcontainerapp-AutoDeployTrigger-2f9a9702-dfe5-44f9-a714-2bbe11ef9f5d.yml'
 
   # Allow manual trigger 
   workflow_dispatch:
