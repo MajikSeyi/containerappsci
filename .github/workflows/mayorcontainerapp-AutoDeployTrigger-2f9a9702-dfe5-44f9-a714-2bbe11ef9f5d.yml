@@ -1,0 +1,44 @@
+name: Trigger auto deployment for mayorcontainerapp
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - '**'
+    - '.github/workflows/mayorcontainerapp-AutoDeployTrigger-2f9a9702-dfe5-44f9-a714-2bbe11ef9f5d.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:
+      
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.MAYORCONTAINERAPP_AZURE_CREDENTIALS }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }}
+          _dockerfilePathKey_: _dockerfilePath_
+          registryUrl: rgbicepregistry.azurecr.io
+          registryUsername: ${{ secrets.MAYORCONTAINERAPP_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.MAYORCONTAINERAPP_REGISTRY_PASSWORD }}
+          containerAppName: mayorcontainerapp
+          resourceGroup: RG-Bicep
+          imageToBuild: rgbicepregistry.azurecr.io/rgbicepregistry.azurecr.io/mayorapptest:${{ github.sha }}
+          
+            
+
+     
+
