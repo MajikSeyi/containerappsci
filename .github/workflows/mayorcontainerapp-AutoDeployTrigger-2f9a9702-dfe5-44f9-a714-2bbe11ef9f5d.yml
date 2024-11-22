@@ -36,7 +36,8 @@ jobs:
           registryPassword: ${{ secrets.MAYORCONTAINERAPP_REGISTRY_PASSWORD }}
           containerAppName: mayorcontainerapp
           resourceGroup: RG-Bicep
-          imageToDeploy: rgbicepregistry.azurecr.io/rgbicepregistry.azurecr.io/mayorapptest:${{ github.sha }}
+          # imageToDeploy: rgbicepregistry.azurecr.io/rgbicepregistry.azurecr.io/mayorapptest:${{ github.sha }}
+          imageToDeploy: rgbicepregistry.azurecr.io/rgbicepregistry.azurecr.io/mayorapptest:7db4cc36536a55edf78c25595162bfeb679989dc
           
             
 
