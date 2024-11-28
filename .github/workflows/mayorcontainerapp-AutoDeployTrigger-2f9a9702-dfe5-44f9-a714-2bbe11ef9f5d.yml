@@ -36,7 +36,7 @@ jobs:
           az containerapp update \
             -n mayorcontainerapp \
             -g RG-Bicep \
-            --image rgbicepregistry.azurecr.io/rgbicepregistry.azurecr.io/mayorapptest:3 \
+            --image rgbicepregistry.azurecr.io/mayorapptest:3 \
             --container-name scanning-service \
             --replace-env-vars SPRING_PROFILES_ACTIVE=cloud APPLICATIONINSIGHTS_ROLE_NAME=scanning-service SERVER_PORT=8080  
 
