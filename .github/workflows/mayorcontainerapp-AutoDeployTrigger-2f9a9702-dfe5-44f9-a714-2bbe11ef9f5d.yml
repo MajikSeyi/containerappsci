@@ -34,11 +34,11 @@ jobs:
       - name: Update Container App
         run: |
           az containerapp update \
-            -n scanning-service \
+            -n mayorcontainerapp \
             -g RG-Bicep \
             --image rgbicepregistry.azurecr.io/rgbicepregistry.azurecr.io/mayorapptest:3 \
-            --container-name mayorcontainerapp \
-            --replace-env-vars SPRING_PROFILES_ACTIVE=cloud APPLICATIONINSIGHTS_ROLE_NAME=scanning-service  SERVER_PORT=8080  
+            --container-name scanning-service \
+            --replace-env-vars SPRING_PROFILES_ACTIVE=cloud APPLICATIONINSIGHTS_ROLE_NAME=scanning-service SERVER_PORT=8080  
 
     
         #  # Step 6: Split traffic for blue-green deployment
