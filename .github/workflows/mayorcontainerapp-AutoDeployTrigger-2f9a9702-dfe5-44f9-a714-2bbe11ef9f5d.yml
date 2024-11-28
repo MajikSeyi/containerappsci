@@ -41,29 +41,29 @@ jobs:
             --replace-env-vars SPRING_PROFILES_ACTIVE=cloud APPLICATIONINSIGHTS_ROLE_NAME=scanning-service SERVER_PORT=8080  
 
     
-        #  # Step 6: Split traffic for blue-green deployment
-      # - name: Configure traffic splitting
-      #   run: |
-      #     # Get the latest revision (green)
-      #     GREEN_REVISION=$(az containerapp revision list \
-      #       -n malwarescanning-service \
-      #       -g rg-x4-malwarescanning \
-      #       --query "[?active==null].{name:name}" -o tsv | head -n 1)
+         # Step 6: Split traffic for blue-green deployment
+      - name: Configure traffic splitting
+        run: |
+          # Get the latest revision (green)
+          GREEN_REVISION=$(az containerapp revision list \
+            -n mayorcontainerapp \
+            -g RG-Bicep \
+            --query "[?active==null].{name:name}" -o tsv | head -n 1)
           
-      #     # Get the current active revision (blue)
-      #     BLUE_REVISION=$(az containerapp revision list \
-      #       -n malwarescanning-service \
-      #       -g rg-x4-malwarescanning \
-      #       --query "[?active==true].{name:name}" -o tsv | head -n 1)
+          # Get the current active revision (blue)
+          BLUE_REVISION=$(az containerapp revision list \
+            -n mayorcontainerapp \
+            -g RG-Bicep \
+            --query "[?active==true].{name:name}" -o tsv | head -n 1)
 
-      #     echo "Blue revision: $BLUE_REVISION"
-      #     echo "Green revision: $GREEN_REVISION"
+          echo "Blue revision: $BLUE_REVISION"
+          echo "Green revision: $GREEN_REVISION"
 
-      #     # Split traffic: 50% to blue, 50% to green
-      #     az containerapp ingress traffic set \
-      #       -n malwarescanning-service \
-      #       -g rg-x4-malwarescanning \
-      #       --traffic-weight $BLUE_REVISION=50 $GREEN_REVISION=50
+          # Split traffic: 50% to blue, 50% to green
+          az containerapp ingress traffic set \
+            -n mayorcontainerapp \
+            -g RG-Bicep \
+            --traffic-weight $BLUE_REVISION=50 $GREEN_REVISION=50
           
 
       # - name: Build and push container image to registry
